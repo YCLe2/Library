@@ -1,38 +1,111 @@
-.App {
+/* App.css */
+
+/* 전체 레이아웃 */
+.container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 */
+h1, h4 {
   text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  font-weight: 300;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 검색창 */
+.input-group {
+  display: flex;
+  margin-bottom: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.input-group .form-control {
+  flex: 1;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 16px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.input-group .btn-primary {
+  border-radius: 0 4px 4px 0;
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.input-group .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* 검색 결과 리스트 */
+.list-group {
+  padding: 0;
+  list-style: none;
+}
+
+.list-group-item {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.list-group-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* 제목 강조 */
+.list-group-item h5 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+/* 상세 정보 링크 */
+.list-group-item a {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.list-group-item a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+  .container {
+    padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .list-group-item {
+    padding: 15px;
+  }
+
+  .input-group .form-control,
+  .input-group .btn-primary {
+    font-size: 14px;
+    padding: 8px;
   }
 }
