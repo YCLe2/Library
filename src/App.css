@@ -1,25 +1,19 @@
-/* App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
 
-/* 전체 레이아웃 */
 .container {
-  margin: 0 auto;
   max-width: 800px;
-  padding: 20px;
-  font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
 }
 
-/* 제목 */
-h1, h4 {
+.text-center {
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: 300;
 }
 
-/* 검색창 */
 .input-group {
   display: flex;
   margin-bottom: 20px;
@@ -27,85 +21,116 @@ h1, h4 {
 
 .input-group .form-control {
   flex: 1;
-  border-radius: 4px 0 0 4px;
-  border: 1px solid #ddd;
+  font-size: 16px;
   padding: 10px;
+}
+
+.input-group .btn {
   font-size: 16px;
 }
 
-.input-group .btn-primary {
-  border-radius: 0 4px 4px 0;
-  background-color: #007bff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.input-group .btn-primary:hover {
-  background-color: #0056b3;
-}
-
-/* 검색 결과 리스트 */
 .list-group {
+  list-style-type: none;
   padding: 0;
-  list-style: none;
 }
 
 .list-group-item {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
-  margin-bottom: 15px;
+  background: white;
   border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #ddd;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.list-group-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.list-group-item img {
+  flex-shrink: 0;
+  width: 80px;
+  height: auto;
+  border-radius: 5px;
+  margin-right: 15px;
+  background: #e9ecef;
 }
 
-/* 제목 강조 */
 .list-group-item h5 {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #222;
+  font-size: 18px;
+  margin-bottom: 5px;
+  color: #333;
 }
 
-/* 상세 정보 링크 */
-.list-group-item a {
-  margin-top: 10px;
+.list-group-item p {
   font-size: 14px;
-  color: #007bff;
+  margin: 3px 0;
+  color: #666;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination .page-item {
+  margin: 0 5px;
+}
+
+.pagination .page-item .page-link {
   text-decoration: none;
-  transition: color 0.3s ease;
+  color: #007bff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
 }
 
-.list-group-item a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+.pagination .page-item.active .page-link {
+  background-color: #007bff;
+  color: white;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 600px) {
-  .container {
-    padding: 10px;
-  }
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+label {
+  font-size: 14px;
+}
+
+h1, h4 {
+  color: #343a40;
+}
+
+h4 {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
   .list-group-item {
-    padding: 15px;
+    flex-direction: column;
+    text-align: center;
   }
 
-  .input-group .form-control,
-  .input-group .btn-primary {
-    font-size: 14px;
-    padding: 8px;
+  .list-group-item img {
+    margin-bottom: 10px;
   }
+}
+
+.custom-pagination {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
