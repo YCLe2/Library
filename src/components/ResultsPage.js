@@ -17,6 +17,8 @@ const ResultsPage = () => {
   const [applySettings, setApplySettings] = useState(false);
   const [isInnerSearch, setIsInnerSearch] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showNicknameModal, setShowNicknameModal] = useState(false);
+  const [nickname, setNickname] = useState("");
   const [selectedBook, setSelectedBook] = useState(null);
   const location = useLocation();
   const keyword = new URLSearchParams(location.search).get("keyword");
@@ -131,6 +133,58 @@ const ResultsPage = () => {
   const handleApplySettings = () => {
     setApplySettings(true);
     setCurrentPage(1); // Reset to first page on new settings
+  };
+
+  const handleRentBook = async () => {
+    if (selectedBook) {
+      try {
+        // Fetch existing records from the mock API
+        const existingRecordsResponse = await axios.get("https://672cb0b81600dda5a9f980b5.mockapi.io/api/v1/my_library");
+        const existingRecords = existingRecordsResponse.data;
+
+        // Check if the selected book is already rented
+        const isAlreadyRented = existingRecords.some(record => record.register_code === stripHtmlTags(selectedBook.id));
+
+        if (isAlreadyRented) {
+          alert("이미 대여한 책입니다.");
+        } else {
+          // Get today's date and the return date (7 days from today)
+          const today = new Date();
+          const rentalDate = today.toISOString().split('T')[0];
+          const returnDate = new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0];
+
+          // Proceed with renting the book
+          const response = await axios.post("https://672cb0b81600dda5a9f980b5.mockapi.io/api/v1/my_library", {
+            register_code: stripHtmlTags(selectedBook.id),
+            book_name: stripHtmlTags(selectedBook.titleInfo),
+            writer: stripHtmlTags(selectedBook.authorInfo),
+            publisher: stripHtmlTags(selectedBook.pubInfo),
+            published_year: stripHtmlTags(selectedBook.pubYearInfo),
+            call_num: selectedBook.callNo,
+            rental_date: rentalDate,
+            return_date: returnDate,
+            nickname: nickname,
+            ISBN: stripHtmlTags(selectedBook.isbn),
+          });
+          console.log("Book rented successfully:", response.data);
+          alert("대여가 완료되었습니다.");
+          setShowNicknameModal(false);
+        }
+      } catch (error) {
+        console.error("Error renting book:", error);
+        alert("대여 중 오류가 발생했습니다.");
+      }
+    }
+  };
+
+  const handleShowNicknameModal = () => {
+    setShowModal(false);
+    setShowNicknameModal(true);
+  };
+
+  const handleCloseNicknameModal = () => {
+    setShowNicknameModal(false);
+    setNickname("");
   };
 
   return (
@@ -282,6 +336,9 @@ const ResultsPage = () => {
               }
             }}
             />
+            <Button variant="primary" onClick={handleShowNicknameModal} className="mt-3">
+              대여
+            </Button>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleCloseModal}>
@@ -290,6 +347,28 @@ const ResultsPage = () => {
           </Modal.Footer>
         </Modal>
       )}
+      <Modal show={showNicknameModal} onHide={handleCloseNicknameModal} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>별칭 입력</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="별칭을 입력하세요"
+            value={nickname}
+            onChange={(e) => setNickname(e.target.value)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseNicknameModal}>
+            닫기
+          </Button>
+          <Button variant="primary" onClick={handleRentBook}>
+            확인
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
