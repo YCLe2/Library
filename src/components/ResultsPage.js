@@ -165,6 +165,7 @@ const ResultsPage = () => {
             return_date: returnDate,
             nickname: nickname,
             ISBN: stripHtmlTags(selectedBook.isbn),
+            controlNo: stripHtmlTags(selectedBook.controlNo),
           });
           console.log("Book rented successfully:", response.data);
           alert("대여가 완료되었습니다.");
@@ -189,12 +190,6 @@ const ResultsPage = () => {
 
   return (
     <div className="container mt-4">
-      <button className="btn btn-secondary mb-3" onClick={() => navigate("/")}>
-        뒤로가기
-      </button>
-      <button className="btn btn-secondary mb-3 ms-2" onClick={() => navigate("/detailed-search")}>
-        상세검색
-      </button>
       <div className="d-flex justify-content-end mb-3">
         <input
           type="checkbox"
@@ -257,6 +252,7 @@ const ResultsPage = () => {
           variant="light"
           className="ms-2"
         >
+          <Dropdown.Item eventKey="5">5</Dropdown.Item>
           <Dropdown.Item eventKey="10">10</Dropdown.Item>
           <Dropdown.Item eventKey="20">20</Dropdown.Item>
           <Dropdown.Item eventKey="30">30</Dropdown.Item>

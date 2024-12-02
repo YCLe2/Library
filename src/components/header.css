@@ -1,0 +1,72 @@
+.header {
+  width: auto;
+  margin: 0 20px;
+  height: 71px;
+  padding-bottom: 0;
+  position: relative; /* Ensure the logo is positioned relative to the header */
+  margin-top: 10px;
+}
+
+.logo {
+  position: absolute;
+  top: 5px; /* 위치 조정 */
+  left: 100px; /* 화면 크기에 따라 점진적으로 변경 */
+  width: auto;
+  transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+.logo a {
+  display: block;
+  width: 40px; /* 기본 로고 너비 */
+  height: 50px; /* 기본 로고 높이 */
+}
+
+.logo-img {
+  width: 160px; /* 기본 로고 이미지 너비 */
+  height: auto; /* 비율 유지 */
+  vertical-align: middle;
+  transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+.divTopMenu {
+  position: relative;
+  height: 72px;
+  background: url(https://library.handong.edu/image/ko/local/topMenuBg.png) no-repeat 50% 0;
+  background-size: cover;
+  z-index: 50;
+}
+
+.topMenu > div {
+  width: auto;
+}
+
+.topMenu > div > ul {
+  display: flex; /* 수평으로 나열 */
+  justify-content: space-around; /* 공간을 균등하게 분배 */
+  list-style: none; /* 기본 리스트 스타일 제거 */
+  padding: 0; /* 기본 패딩 제거 */
+  margin: 0; /* 기본 마진 제거 */
+}
+
+.topMenu > div > ul > li {
+  width: auto;
+}
+
+.topMenu > div > ul > li > a {
+  display: block;
+  text-align: center;
+  color: #fff;
+  font-size: 19px;
+  font-family: NotoSansM;
+  line-height: 72px;
+  padding: 0 20px; /* 좌우 패딩 추가 */
+  font-weight: bold;
+  text-decoration-line: none;
+}
+
+/* 화면 크기에 따라 위치 및 크기 조정 */
+@media screen and (max-width: 1240px) {
+  .logo {
+    left: 5px; /* 왼쪽으로 이동 */
+  }
+}

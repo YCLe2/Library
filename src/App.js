@@ -5,16 +5,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SearchPage from "./components/SearchPage";
 import ResultsPage from "./components/ResultsPage";
 import DetailedSearchPage from "./components/DetailedSearchPage";
+import Header from "./components/header";
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<SearchPage />} />
-        <Route path="/results" element={<ResultsPage />} />
-        <Route path="/detailed-search" element={<DetailedSearchPage />} />
-      </Routes>
-    </Router>
+    <>
+      <Header />
+      <Router>
+        <Routes>
+          <Route path="/" element={<SearchPage />} />
+          <Route path="/results" element={<ResultsPage />} />
+          <Route path="/detailed-search" element={<DetailedSearchPage />} />
+        </Routes>
+      </Router>
+    </>
   );
 };
 
