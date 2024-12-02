@@ -23,6 +23,7 @@ const ResultsPage = () => {
   const location = useLocation();
   const keyword = new URLSearchParams(location.search).get("keyword");
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBooks = async (searchKeyword) => {
@@ -57,6 +58,8 @@ const ResultsPage = () => {
         console.error("API 요청 중 오류 발생:", error);
         setBooks([]);
         setFilteredBooks([]);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -263,7 +266,9 @@ const ResultsPage = () => {
         </button>
       </div>
       <h4>검색 결과:</h4>
-      {currentBooks.length === 0 ? (
+      {isLoading ? (
+        <p>검색 중...(최대 30초 정도 소요됩니다.)</p>
+      ) : books.length === 0 ? (
         <p>결과가 없습니다.</p>
       ) : (
         <ul className="list-group">
