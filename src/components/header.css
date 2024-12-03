@@ -9,7 +9,6 @@
 
 .logo {
   position: absolute;
-  top: 5px; /* 위치 조정 */
   left: 100px; /* 화면 크기에 따라 점진적으로 변경 */
   width: auto;
   transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
@@ -26,6 +25,22 @@
   height: auto; /* 비율 유지 */
   vertical-align: middle;
   transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+.logoRight {
+  position: absolute;
+  margin-top: 10px;
+  left: 1300px; /* 화면 크기에 따라 점진적으로 변경 */
+  width: auto;
+  transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+.logo-right {
+  width: 160px; /* 기본 로고 이미지 너비 */
+  height: auto; /* 비율 유지 */
+  vertical-align: middle;
+  transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
+  margin-top: 10px;
 }
 
 .divTopMenu {
@@ -70,3 +85,4 @@
     left: 5px; /* 왼쪽으로 이동 */
   }
 }
+
