@@ -1,0 +1,19 @@
+/* Center the filter container */
+.filter-container {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* Ensure buttons and dropdowns don't wrap */
+.filter-container button,
+.filter-container select,
+.filter-container input {
+  white-space: nowrap;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .filter-container {
+    max-width: 100%;
+  }
+}
