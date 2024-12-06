@@ -169,6 +169,7 @@ const ResultsPage = () => {
             nickname: nickname,
             ISBN: stripHtmlTags(selectedBook.isbn),
             controlNo: stripHtmlTags(selectedBook.controlNo),
+            comment: ""
           });
           console.log("Book rented successfully:", response.data);
           alert("대여가 완료되었습니다.");
@@ -184,6 +185,7 @@ const ResultsPage = () => {
   const handleShowNicknameModal = () => {
     setShowModal(false);
     setShowNicknameModal(true);
+    setNickname("");
   };
 
   const handleCloseNicknameModal = () => {
