@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import "../Styles/ListPage.css";
+import { getThumbnailUrl, getThumbnailUrl2, stripHtmlTags } from "../utils";
 
 const ListPage = () => {
   const [data, setData] = useState([]);
@@ -14,7 +15,9 @@ const ListPage = () => {
   const [sortField, setSortField] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
   const [resultsPerPage, setResultsPerPage] = useState(10);
-
+// Modal state
+const [isModalOpen, setIsModalOpen] = useState(false);
+const [selectedBook, setSelectedBook] = useState(null);
   const navigate = useNavigate();
   const mockAPI = "https://672cb0b81600dda5a9f980b5.mockapi.io/api/v1/my_library";
   
@@ -107,6 +110,15 @@ const ListPage = () => {
     }
   };
 
+  const openModal = (book) => {
+    setSelectedBook(book);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedBook(null);
+  };
   return (
     <div>
       <div className="container my-5">
@@ -255,13 +267,16 @@ const ListPage = () => {
                     />
                   </td>
                   <td>{index + 1}</td>
-                  <td>{item.book_name}</td>
+                  <td className="book-name text-primary" onClick={() => openModal(item)}>{item.book_name}</td>
                   <td>{item.nickname}</td>
                   <td>{item.writer}</td>
                   <td>{item.register_code}</td>
                   <td>{item.call_num}</td>
                   <td>{item.publisher}</td>
-                  <td>{item.ISBN}</td>
+                  {/* <td>{item.ISBN}</td> */}
+                  <td>{item.ISBN.split(" ")[0]}</td>
+
+
                   <td>{item.published_year}</td>
                   <td>{item.rental_date}</td>
                   <td>{item.return_date}</td>
@@ -275,6 +290,44 @@ const ListPage = () => {
           </tbody>
         </table>
       </div>
+      {/* Modal for Book Details */}
+      {selectedBook && (
+        <Modal show={isModalOpen} onHide={closeModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>도서 상세 정보</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <img
+                src={getThumbnailUrl(selectedBook.controlNo)}
+                alt="책 썸네일"
+                className="img-thumbnail me-3"
+                style={{ width: "100px", height: "auto" }}
+                onError={(e) => {
+                  if(e.target.src === getThumbnailUrl(selectedBook.controlNo)) {
+                    e.target.src = getThumbnailUrl2(selectedBook.controlNo);
+                }else{
+                  e.target.src = "https://library.handong.edu/image/ko/solution/local/noCoverImg.jpg";
+                }
+              }}
+              />
+            <p><strong>도서명:</strong> {selectedBook.book_name}</p>
+            <p><strong>도서별칭:</strong> {selectedBook.nickname}</p>
+            <p><strong>저자:</strong> {selectedBook.writer}</p>
+            <p><strong>출판사:</strong> {selectedBook.publisher}</p>
+            <p><strong>출판연도:</strong> {selectedBook.published_year}</p>
+            <p><strong>등록번호:</strong> {selectedBook.register_code}</p>
+            <p><strong>ISBN:</strong> {selectedBook.ISBN}</p>
+            <p><strong>대출일:</strong> {selectedBook.rental_date}</p>
+            <p><strong>반납예정일:</strong> {selectedBook.return_date}</p>
+            <p><strong>추천글:</strong> {selectedBook.comment}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={closeModal}>
+              닫기
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </div>
   );
 };

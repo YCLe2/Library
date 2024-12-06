@@ -343,11 +343,6 @@ const ResultsPage = () => {
               대여
             </Button>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleCloseModal}>
-              닫기
-            </Button>
-          </Modal.Footer>
         </Modal>
       )}
       <Modal show={showNicknameModal} onHide={handleCloseNicknameModal} size="lg">

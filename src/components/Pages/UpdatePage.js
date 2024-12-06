@@ -14,9 +14,9 @@ const UpdatePage = () => {
     publisher: "",
     ISBN: "",
     published_year: "",
-    comment: "",
     call_num: "",
     nickname: "",
+    comment: ""
   });
 
   // Fetch current data for the item
