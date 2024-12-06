@@ -84,5 +84,35 @@
   .logo {
     left: 5px; /* 왼쪽으로 이동 */
   }
+  .logoRight {
+    left: 1050px; /* 왼쪽으로 이동 */
+  }
 }
 
+/* 화면 크기가 1200px 이하일 때 */
+@media screen and (max-width: 1200px) {
+  .logoRight {
+    left: 1000px; /* 위치 조정 */
+  }
+}
+
+/* 화면 크기가 992px 이하일 때 */
+@media screen and (max-width: 992px) {
+  .logoRight {
+    left: 800px; /* 위치 조정 */
+  }
+}
+
+/* 화면 크기가 768px 이하일 때 */
+@media screen and (max-width: 768px) {
+  .logoRight {
+    left: 570px; /* 위치 조정 */
+  }
+}
+
+/* 화면 크기가 576px 이하일 때 */
+@media screen and (max-width: 576px) {
+  .logoRight {
+    left: 370px; /* 위치 조정 */
+  }
+}
