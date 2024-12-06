@@ -29,8 +29,8 @@
 
 .logoRight {
   position: absolute;
-  margin-top: 10px;
-  left: 1300px; /* 화면 크기에 따라 점진적으로 변경 */
+  left: calc(100% - 50px); /* 기본 위치를 화면 크기에 따라 조정 */
+  transform: translateX(-100%);
   width: auto;
   transition: all 0.3s ease-in-out; /* 부드러운 전환 효과 */
 }
@@ -85,34 +85,34 @@
     left: 5px; /* 왼쪽으로 이동 */
   }
   .logoRight {
-    left: 1050px; /* 왼쪽으로 이동 */
+    left: calc(100% - 50px); /* 위치 조정 */
   }
 }
 
 /* 화면 크기가 1200px 이하일 때 */
 @media screen and (max-width: 1200px) {
   .logoRight {
-    left: 1000px; /* 위치 조정 */
+    left: calc(100% - 50px); /* 위치 조정 */
   }
 }
 
 /* 화면 크기가 992px 이하일 때 */
 @media screen and (max-width: 992px) {
   .logoRight {
-    left: 800px; /* 위치 조정 */
+    left: calc(100% - 50px); /* 위치 조정 */
   }
 }
 
 /* 화면 크기가 768px 이하일 때 */
 @media screen and (max-width: 768px) {
   .logoRight {
-    left: 570px; /* 위치 조정 */
+    left: calc(100% - 50px); /* 위치 조정 */
   }
 }
 
 /* 화면 크기가 576px 이하일 때 */
 @media screen and (max-width: 576px) {
   .logoRight {
-    left: 370px; /* 위치 조정 */
+    left: calc(100% - 50px); /* 위치 조정 */
   }
 }
