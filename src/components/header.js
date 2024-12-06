@@ -24,13 +24,13 @@ const Header = () => {
                             <a href="/results">검색</a>
                         </li>
                         <li class="menu3">
-                            <a href="https://hisnet.handong.edu/">Hisnet</a>
+                            <a href="https://hisnet.handong.edu/">HISNet</a>
                         </li>
                         <li class="menu4">
                             <a href="/about">About</a>
                         </li>
                         <li class="menu5">
-                            <a href="/myLibrary">myLibrary</a>
+                            <a href="/myLibrary">My Library</a>
                         </li>
                     </ul>
                 </div>
