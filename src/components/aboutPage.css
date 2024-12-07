@@ -53,3 +53,52 @@
 .developer-info a:hover {
   text-decoration: underline;
 }
+
+.mento-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  justify-content: center; /* 추가된 부분 */
+}
+
+.mento-profile {
+  flex: 1;
+  min-width: 300px;
+  max-width: 45%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mento-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mento-info {
+  text-align: left;
+}
+
+.mento-info h2 {
+  margin-bottom: 10px;
+}
+
+.mento-info p {
+  margin-bottom: 10px;
+}
+
+.mento-info a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.mento-info a:hover {
+  text-decoration: underline;
+}

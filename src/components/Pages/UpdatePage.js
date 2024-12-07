@@ -202,7 +202,7 @@ const UpdatePage = () => {
           <button
             type="button"
             className="btn btn-secondary"
-            onClick={() => navigate("/list")}
+            onClick={() => navigate("/myLibrary")}
           >
             취소
           </button>
