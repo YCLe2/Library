@@ -11,6 +11,27 @@
   white-space: nowrap;
 }
 
+/* Style for book name */
+.book-name {
+  text-decoration: underline; /* Underline by default */
+  cursor: pointer; /* Pointer cursor */
+  transition: text-decoration 0.3s ease; /* Smooth transition for text-decoration */
+}
+
+/* Remove underline on hover */
+.book-name:hover {
+  text-decoration: none;
+}
+
+.table-dark th, .table-dark td {
+  vertical-align: middle; /* 세로 가운데 정렬 */
+  text-align: center;     /* 가로 가운데 정렬 (옵션) */
+}
+
+.img-thumbnail_list {
+  max-width: 125px;
+  height: auto;
+}
 /* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .filter-container {

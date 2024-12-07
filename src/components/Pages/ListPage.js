@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Modal, Button } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import "../Styles/ListPage.css";
-import { getThumbnailUrl, getThumbnailUrl2, stripHtmlTags } from "../utils";
+import { getThumbnailUrl, getThumbnailUrl2 } from "../utils";
 
 const ListPage = () => {
   const [data, setData] = useState([]);
@@ -202,7 +202,7 @@ const [selectedBook, setSelectedBook] = useState(null);
     <option value="title_nick">도서별칭</option>
     <option value="author">저자</option>
     <option value="rental_date">대출일</option>
-    <option value="return_date">반납예정일</option>
+    <option value="return_date">반납일</option>
   </select>
   <select
     id="sortOrder"
@@ -239,15 +239,15 @@ const [selectedBook, setSelectedBook] = useState(null);
               <th>Actions</th>
               <th>No.</th>
               <th>도서명</th>
-              <th>도서별칭</th>
+              <th>도서<br/>별칭</th>
               <th>저자명</th>
               <th>등록번호</th>
               <th>청구기호</th>
               <th>출판사명</th>
-              <th>ISBN</th>
-              <th>출판연도</th>
+              {/* <th>ISBN</th> */}
+              <th>출판<br/>연도</th>
               <th>대출일</th>
-              <th>반납예정일</th>
+              <th>반납일</th>
             </tr>
           </thead>
           <tbody>
@@ -274,7 +274,7 @@ const [selectedBook, setSelectedBook] = useState(null);
                   <td>{item.call_num}</td>
                   <td>{item.publisher}</td>
                   {/* <td>{item.ISBN}</td> */}
-                  <td>{item.ISBN.split(" ")[0]}</td>
+                  {/* <td>{item.ISBN.split(" ")[0]}</td> */}
 
 
                   <td>{item.published_year}</td>
@@ -300,8 +300,8 @@ const [selectedBook, setSelectedBook] = useState(null);
           <img
                 src={getThumbnailUrl(selectedBook.controlNo)}
                 alt="책 썸네일"
-                className="img-thumbnail me-3"
-                style={{ width: "100px", height: "auto" }}
+                className="img-thumbnail_list me-3"
+                
                 onError={(e) => {
                   if(e.target.src === getThumbnailUrl(selectedBook.controlNo)) {
                     e.target.src = getThumbnailUrl2(selectedBook.controlNo);
@@ -318,7 +318,7 @@ const [selectedBook, setSelectedBook] = useState(null);
             <p><strong>등록번호:</strong> {selectedBook.register_code}</p>
             <p><strong>ISBN:</strong> {selectedBook.ISBN}</p>
             <p><strong>대출일:</strong> {selectedBook.rental_date}</p>
-            <p><strong>반납예정일:</strong> {selectedBook.return_date}</p>
+            <p><strong>반납일:</strong> {selectedBook.return_date}</p>
             <p><strong>추천글:</strong> {selectedBook.comment}</p>
           </Modal.Body>
           <Modal.Footer>

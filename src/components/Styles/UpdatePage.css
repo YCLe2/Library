@@ -1,0 +1,12 @@
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .img-thumbnail {
+    max-width: 150px;
+    height: auto;
+  }
+  
