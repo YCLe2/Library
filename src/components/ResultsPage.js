@@ -162,12 +162,12 @@ const ResultsPage = () => {
             book_name: stripHtmlTags(selectedBook.titleInfo),
             writer: stripHtmlTags(selectedBook.authorInfo),
             publisher: stripHtmlTags(selectedBook.pubInfo),
-            published_year: stripHtmlTags(selectedBook.pubYearInfo),
-            call_num: selectedBook.callNo,
+            published_year: stripHtmlTags(selectedBook.pubYearInfo.substring(0, 4)),
+            call_num: (selectedBook.callNo || "-"),
             rental_date: rentalDate,
             return_date: returnDate,
             nickname: nickname,
-            ISBN: stripHtmlTags(selectedBook.isbn),
+            ISBN: stripHtmlTags(selectedBook.isbn || "-"),
             controlNo: stripHtmlTags(selectedBook.controlNo),
             comment: ""
           });
@@ -298,7 +298,7 @@ const ResultsPage = () => {
                 </h5>
                 <p>저자: {stripHtmlTags(book.authorInfo)}</p>
                 <p>출판사: {stripHtmlTags(book.pubInfo)}</p>
-                <p>발행년도: {stripHtmlTags(book.pubYearInfo)}</p>
+                <p>발행년도: {stripHtmlTags(book.pubYearInfo.substring(0, 4))}</p>
                 <p>등록번호: {stripHtmlTags(book.id)}</p>
                 <p>청구기호: {stripHtmlTags(book.callNo)}</p>
               </div>
@@ -318,14 +318,14 @@ const ResultsPage = () => {
             <Modal.Title>{stripHtmlTags(selectedBook.titleInfo)}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p><strong>등록번호:</strong> {stripHtmlTags(selectedBook.id)}</p>
+            <p><strong>등록번호:</strong> {stripHtmlTags(selectedBook.id || "-")}</p>
             <p><strong>표제/저자사항:</strong> {stripHtmlTags(selectedBook.titleInfo)} / {stripHtmlTags(selectedBook.authorInfo)}</p>
             <p><strong>발행사항:</strong> {stripHtmlTags(selectedBook.pubInfo)} ({stripHtmlTags(selectedBook.pubYearInfo)})</p>
-            <p><strong>형태사항:</strong> {selectedBook.mediaName|| "정보 없음"}</p>
-            <p><strong>ISBN:</strong> {selectedBook.isbn || "정보 없음"}</p>
-            <p><strong>청구기호:</strong> {selectedBook.callNo || "정보 없음"}</p>
-            <p><strong>분류기호:</strong> {selectedBook.classNo || "정보 없음"}</p>
-            <p><strong>주제명:</strong> {selectedBook.kdcName1s || "정보 없음"}</p>
+            <p><strong>형태사항:</strong> {selectedBook.mediaName|| "-"}</p>
+            <p><strong>ISBN:</strong> {selectedBook.isbn || "-"}</p>
+            <p><strong>청구기호:</strong> {selectedBook.callNo || "-"}</p>
+            <p><strong>분류기호:</strong> {selectedBook.classNo || "-"}</p>
+            <p><strong>주제명:</strong> {selectedBook.kdcName1s || "-"}</p>
             <img
               src={getThumbnailUrl(selectedBook.controlNo)}
               alt="책 썸네일"

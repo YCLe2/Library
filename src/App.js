@@ -9,6 +9,7 @@ import Create from "./components/Pages/CreatePage"; // Ensure proper casing
 import Detail from "./components/Pages/DetailPage"; // Ensure proper casing
 import ListPage from "./components/Pages/ListPage";
 import Update from "./components/Pages/UpdatePage"; 
+import About from "./components/aboutPage";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/create" element={<Create />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/update/:id" element={<Update />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Router>
     </>
