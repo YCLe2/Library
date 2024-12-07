@@ -55,7 +55,7 @@ const UpdatePage = () => {
       });
       if (response.ok) {
         alert("수정이 완료되었습니다.");
-        navigate("/list"); // Redirect to the list page
+        navigate("/myLibrary"); // Redirect to the list page
       } else {
         alert("수정에 실패했습니다.");
         console.error("Error updating data:", response.statusText);
