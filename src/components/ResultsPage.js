@@ -9,7 +9,7 @@ const ResultsPage = () => {
   const [books, setBooks] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [innerSearchKeyword, setInnerSearchKeyword] = useState("");
-  const [innerSearchCategory, setInnerSearchCategory] = useState("title");
+  const [innerSearchCategory, setInnerSearchCategory] = useState("all");
   const [sortOption, setSortOption] = useState("none");
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1);
@@ -104,6 +104,13 @@ const ResultsPage = () => {
           break;
         case "publisher":
           filtered = books.filter(book => book.pubInfo.includes(innerSearchKeyword));
+          break;
+        case "all":
+          filtered = books.filter(book =>
+            book.titleInfo.includes(innerSearchKeyword) ||
+            book.authorInfo.includes(innerSearchKeyword) ||
+            book.pubInfo.includes(innerSearchKeyword)
+          );
           break;
         default:
           filtered = books;
@@ -210,10 +217,11 @@ const ResultsPage = () => {
       <div className="d-flex justify-content-end mb-3">
         <DropdownButton
           id="dropdown-basic-button"
-          title={`${innerSearchCategory === "title" ? "제목" : innerSearchCategory === "author" ? "저자" : "출판사"}`}
+          title={`${innerSearchCategory === "title" ? "제목" : innerSearchCategory === "author" ? "저자" : innerSearchCategory === "publisher" ? "출판사" : "전체"}`}
           onSelect={(e) => setInnerSearchCategory(e)}
           variant="light"
         >
+          <Dropdown.Item eventKey="all">전체</Dropdown.Item>
           <Dropdown.Item eventKey="title">제목</Dropdown.Item>
           <Dropdown.Item eventKey="author">저자</Dropdown.Item>
           <Dropdown.Item eventKey="publisher">출판사</Dropdown.Item>
