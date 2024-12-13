@@ -20,6 +20,7 @@ const App = () => {
           <Route path="/myLibrary" element={<ListPage />} />
           <Route path="/update/:id" element={<Update />} />
           <Route path="/about" element={<About />} />
+          <Route path="/myUpdate/:id" element={<Update />} />
         </Routes>
       </Router>
     </>
