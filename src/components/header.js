@@ -12,7 +12,7 @@ const Header = () => {
             </div>
             <div className="logoRight">
                 <a href="https://www.nl.go.kr/">
-                    <img src="https://i.namu.wiki/i/u1G8Qe7pzvfK6CBzVYh0F5l5JpNj1iRHc022mjib1Ecmhki2ahDBfSwdf1mQhUhJtbXXM9c9R8kCDgrakXPNlka7yOcTPvEpEVpYHN7BGmBqFo80h5dPLR8sxIuPXDy14_ucdjTDfGuGGExfrO0T0A.svg" alt="국립중앙도서관" className="logo-right" />
+                    <img src="https://www.museum.go.kr/ux/content/images/common/header_logo.png" alt="국립중앙도서관" className="logo-right" />
                 </a>
             </div>
         </div>
