@@ -20,9 +20,6 @@ const Header = () => {
             <div className="topMenu">
                 <div>
                     <ul>
-                        <li class="menu1">
-                            <a href="/results">검색</a>
-                        </li>
                         <li class="menu3">
                             <a href="https://hisnet.handong.edu/">HISNet</a>
                         </li>
