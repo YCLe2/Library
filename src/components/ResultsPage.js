@@ -68,6 +68,27 @@ const ResultsPage = () => {
     }
   }, [keyword]);
 
+  useEffect(() => {
+    if (applySettings) {
+      // Sorting logic
+      const sortedBooks = [...filteredBooks].sort((a, b) => {
+        if (sortOption === 'title') {
+          return sortOrder === 'asc' ? a.titleInfo.localeCompare(b.titleInfo) : b.titleInfo.localeCompare(a.titleInfo);
+        } else if (sortOption === 'author') {
+          return sortOrder === 'asc' ? a.authorInfo.localeCompare(b.authorInfo) : b.authorInfo.localeCompare(a.authorInfo);
+        } else if (sortOption === 'publisher') {
+          return sortOrder === 'asc' ? a.pubInfo.localeCompare(b.pubInfo) : b.pubInfo.localeCompare(a.pubInfo);
+        } else if (sortOption === 'pubYear') {
+          return sortOrder === 'asc' ? a.pubYearInfo.localeCompare(b.pubYearInfo) : b.pubYearInfo.localeCompare(a.pubYearInfo);
+        }
+        return 0; // No sorting if sortOption is 'none'
+      });
+
+      setFilteredBooks(sortedBooks);
+      setApplySettings(false); // Reset applySettings after applying
+    }
+  }, [applySettings, filteredBooks, sortOption, sortOrder]);
+
   const handleInnerSearch = () => {
     if (isInnerSearch) {
       let filtered = [];
@@ -91,35 +112,9 @@ const ResultsPage = () => {
     setCurrentPage(1); // Reset to first page on new search
   };
 
-  const handleSort = (books) => {
-    let sortedBooks = [...books];
-    switch (sortOption) {
-      case "title":
-        sortedBooks.sort((a, b) => a.titleInfo.localeCompare(b.titleInfo));
-        break;
-      case "author":
-        sortedBooks.sort((a, b) => a.authorInfo.localeCompare(b.authorInfo));
-        break;
-      case "publisher":
-        sortedBooks.sort((a, b) => a.pubInfo.localeCompare(b.pubInfo));
-        break;
-      case "pubYear":
-        sortedBooks.sort((a, b) => a.pubYearInfo.localeCompare(b.pubYearInfo));
-        break;
-      default:
-        break;
-    }
-    if (sortOrder === "desc") {
-      sortedBooks.reverse();
-    }
-    return sortedBooks;
-  };
-
-  const sortedBooks = applySettings ? handleSort(filteredBooks) : filteredBooks;
-
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = sortedBooks.slice(indexOfFirstBook, indexOfLastBook);
+  const currentBooks = filteredBooks.slice(indexOfFirstBook, indexOfLastBook);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -231,39 +226,39 @@ const ResultsPage = () => {
         <DropdownButton
           id="dropdown-sort-button"
           title={`정렬: ${sortOption === "none" ? "정렬안함" : sortOption === "title" ? "제목" : sortOption === "author" ? "저자" : sortOption === "publisher" ? "출판사" : "발행년도"}`}
-          onSelect={(e) => setSortOption(e)}
           variant="light"
         >
-          <Dropdown.Item eventKey="none">정렬안함</Dropdown.Item>
-          <Dropdown.Item eventKey="title">제목</Dropdown.Item>
-          <Dropdown.Item eventKey="author">저자</Dropdown.Item>
-          <Dropdown.Item eventKey="publisher">출판사</Dropdown.Item>
-          <Dropdown.Item eventKey="pubYear">발행년도</Dropdown.Item>
+          <Dropdown.Item eventKey="none" onClick={() => setSortOption("none")}>정렬안함</Dropdown.Item>
+          <Dropdown.Item eventKey="title" onClick={() => setSortOption("title")}>제목</Dropdown.Item>
+          <Dropdown.Item eventKey="author" onClick={() => setSortOption("author")}>저자</Dropdown.Item>
+          <Dropdown.Item eventKey="publisher" onClick={() => setSortOption("publisher")}>출판사</Dropdown.Item>
+          <Dropdown.Item eventKey="pubYear" onClick={() => setSortOption("pubYear")}>발행년도</Dropdown.Item>
         </DropdownButton>
         <DropdownButton
           id="dropdown-order-button"
           title={`순서: ${sortOrder === "asc" ? "오름차순" : "내림차순"}`}
-          onSelect={(e) => setSortOrder(e)}
           variant="light"
           className="ms-2"
         >
-          <Dropdown.Item eventKey="asc">오름차순</Dropdown.Item>
-          <Dropdown.Item eventKey="desc">내림차순</Dropdown.Item>
+          <Dropdown.Item eventKey="asc" onClick={() => setSortOrder("asc")}>오름차순</Dropdown.Item>
+          <Dropdown.Item eventKey="desc" onClick={() => setSortOrder("desc")}>내림차순</Dropdown.Item>
         </DropdownButton>
         <DropdownButton
           id="dropdown-results-per-page"
           title={`${booksPerPage}`}
-          onSelect={(e) => setBooksPerPage(Number(e))}
           variant="light"
           className="ms-2"
         >
-          <Dropdown.Item eventKey="5">5</Dropdown.Item>
-          <Dropdown.Item eventKey="10">10</Dropdown.Item>
-          <Dropdown.Item eventKey="20">20</Dropdown.Item>
-          <Dropdown.Item eventKey="30">30</Dropdown.Item>
-          <Dropdown.Item eventKey="50">50</Dropdown.Item>
+          <Dropdown.Item eventKey="5" onClick={() => setBooksPerPage(5)}>5</Dropdown.Item>
+          <Dropdown.Item eventKey="10" onClick={() => setBooksPerPage(10)}>10</Dropdown.Item>
+          <Dropdown.Item eventKey="20" onClick={() => setBooksPerPage(20)}>20</Dropdown.Item>
+          <Dropdown.Item eventKey="30" onClick={() => setBooksPerPage(30)}>30</Dropdown.Item>
+          <Dropdown.Item eventKey="50" onClick={() => setBooksPerPage(50)}>50</Dropdown.Item>
         </DropdownButton>
-        <button className="btn btn-primary ms-2" onClick={handleApplySettings}>
+        <button
+          className="btn btn-primary ms-2"
+          onClick={handleApplySettings}
+        >
           조회
         </button>
       </div>
