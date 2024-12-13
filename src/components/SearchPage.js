@@ -44,19 +44,19 @@ const SearchPage = () => {
           <h6>추천 검색어</h6>
           <ul>
             <li>
-              <a href="/results?keyword=컴퓨터">#컴퓨터</a>
+              <a href="/results?keyword=갈대상자">#갈대상자</a>
             </li>
             <li>
-              <a href="/results?keyword=프로그래밍">#프로그래밍</a>
+              <a href="/results?keyword=해리포터">#해리포터</a>
             </li>
             <li>
-              <a href="/results?keyword=인공지능">#인공지능</a>
+              <a href="/results?keyword=경영학">#경영학</a>
             </li>
             <li>
-              <a href="/results?keyword=빅데이터">#빅데이터</a>
+              <a href="/results?keyword=경제학">#경제학</a>
             </li>
             <li>
-              <a href="/results?keyword=자료구조">#자료구조</a>
+              <a href="/results?keyword=디자인">#디자인</a>
             </li>
           </ul>
         </div>

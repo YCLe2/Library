@@ -90,6 +90,9 @@ const ResultsPage = () => {
   }, [applySettings, filteredBooks, sortOption, sortOrder]);
 
   const handleInnerSearch = () => {
+    setIsLoading(true); // Show loading message
+    setFilteredBooks([]); // Clear current results
+
     if (isInnerSearch) {
       let filtered = [];
       switch (innerSearchCategory) {
@@ -106,8 +109,14 @@ const ResultsPage = () => {
           filtered = books;
       }
       setFilteredBooks(filtered);
+      setIsLoading(false); // Hide loading message after filtering
     } else {
-      navigate(`/results?keyword=${innerSearchKeyword}`);
+      // Navigate to a blank keyword page first
+      navigate(`/results?keyword=`);
+      // Then navigate to the actual keyword page
+      setTimeout(() => {
+        navigate(`/results?keyword=${innerSearchKeyword}`);
+      }, 0);
     }
     setCurrentPage(1); // Reset to first page on new search
   };
