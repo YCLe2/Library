@@ -10,7 +10,7 @@ const ListPage = () => {
   const [data, setData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchCategory, setSearchCategory] = useState("title");
+  const [searchCategory, setSearchCategory] = useState("book_name");
   const [dateRange, setDateRange] = useState({ start: "", end: "" });
   const [sortField, setSortField] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
@@ -35,15 +35,62 @@ const [selectedBook, setSelectedBook] = useState(null);
     };
     loadData();
   }, []);
+   // 반납일 지난 데이터 자동 삭제
+   useEffect(() => {
+    const deleteOverdueItems = async () => {
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0); // 시간을 00:00:00으로 설정
+    
+      const overdueItems = data.filter((item) => {
+        const returnDate = new Date(item.return_date);
+        returnDate.setHours(0, 0, 0, 0); // 시간을 00:00:00으로 설정
+        
+        return returnDate < currentDate; // 날짜 비교
+      });
+    
+      for (const item of overdueItems) {
+        try {
+          const response = await fetch(`${mockAPI}/${item.no}`, { method: "DELETE" });
+          if (response.ok) {
+            console.log(`Deleted overdue item: ${item.book_name}`);
+          }
+        } catch (error) {
+          console.error("Error deleting overdue item:", error);
+        }
+      }
+    
+      // 클라이언트 데이터 업데이트
+      const updatedData = data.filter((item) => {
+        const returnDate = new Date(item.return_date);
+        returnDate.setHours(0, 0, 0, 0); // 시간을 00:00:00으로 설정
+        return returnDate >= currentDate; // 삭제되지 않은 항목 필터링
+      });
+      setData(updatedData);
+      setFilteredData(updatedData);
+    };
+    
+  
+    if (data.length > 0) {
+      deleteOverdueItems();
+    }
+  }, [data]);
+  
 
   const handleSearch = () => {
     let filtered = [...data];
-  
+    
     // 검색 필터
     if (searchQuery.trim()) {
-      filtered = filtered.filter((item) =>
-        item[searchCategory]?.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+      filtered = filtered.filter((item) => {
+       
+        const fieldValue = item[searchCategory]?.toLowerCase() || ""; // 필드 값 가져오기
+        console.log("아이템 : ", item);
+        console.log("서치쿼리 : ", searchQuery);
+        console.log("서치카테고리 : ", searchCategory);
+        console.log("결과 : ", item[searchCategory]);
+        return fieldValue.includes(searchQuery.toLowerCase()); // 검색어 포함 여부 확인
+      }
+    );
     }
   
     // 날짜 필터
@@ -58,9 +105,9 @@ const [selectedBook, setSelectedBook] = useState(null);
     // 정렬 로직
     if (sortField) {
       const fieldMapping = {
-        title: "book_name",
-        title_nick: "nickname",
-        author: "writer",
+        book_name: "book_name",
+        nickname: "nickname",
+        writer: "writer",
         rental_date: "rental_date",
         return_date: "return_date",
       };
@@ -145,9 +192,9 @@ const [selectedBook, setSelectedBook] = useState(null);
     value={searchCategory}
     onChange={(e) => setSearchCategory(e.target.value)}
   >
-    <option value="title">도서명</option>
-    <option value="title_nick">도서별칭</option>
-    <option value="author">저자</option>
+    <option value="book_name">도서명</option>
+    <option value="nickname">도서별칭</option>
+    <option value="writer">저자</option>
   </select>
   <input
     id="searchKeyword"
@@ -198,9 +245,9 @@ const [selectedBook, setSelectedBook] = useState(null);
     onChange={(e) => setSortField(e.target.value)}
   >
     <option value="">정렬항목</option>
-    <option value="title">도서명</option>
-    <option value="title_nick">도서별칭</option>
-    <option value="author">저자</option>
+    <option value="book_name">도서명</option>
+    <option value="nickname">도서별칭</option>
+    <option value="writer">저자</option>
     <option value="rental_date">대출일</option>
     <option value="return_date">반납일</option>
   </select>
@@ -213,18 +260,7 @@ const [selectedBook, setSelectedBook] = useState(null);
     <option value="asc">오름차순</option>
     <option value="desc">내림차순</option>
   </select>
-  <select
-    className="form-select"
-    value={resultsPerPage}
-    onChange={(e) => setResultsPerPage(Number(e.target.value))}
-  >
-    <option value="10">10건</option>
-    <option value="15">15건</option>
-    <option value="20">20건</option>
-    <option value="30">30건</option>
-    <option value="50">50건</option>
-    <option value="100">100건</option>
-  </select>
+  
   <button className="btn btn-primary" onClick={handleSearch}>
     조회
 </button>
@@ -239,13 +275,13 @@ const [selectedBook, setSelectedBook] = useState(null);
               <th>Actions</th>
               <th>No.</th>
               <th>도서명</th>
-              <th>도서<br/>별칭</th>
+              <th>도서<br />별칭</th>
               <th>저자명</th>
               <th>등록번호</th>
               <th>청구기호</th>
               <th>출판사명</th>
               {/* <th>ISBN</th> */}
-              <th>출판<br/>연도</th>
+              <th>출판<br />연도</th>
               <th>대출일</th>
               <th>반납일</th>
             </tr>
