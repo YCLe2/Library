@@ -97,7 +97,7 @@ const UpdatePage = () => {
               id="book_name"
               name="book_name"
               value={formData.book_name}
-              onChange={handleChange}
+              readOnly
               className="form-control"
               required
             />
@@ -111,7 +111,7 @@ const UpdatePage = () => {
               id="writer"
               name="writer"
               value={formData.writer}
-              onChange={handleChange}
+              readOnly
               className="form-control"
               required
             />
@@ -125,7 +125,8 @@ const UpdatePage = () => {
               id="publisher"
               name="publisher"
               value={formData.publisher}
-              onChange={handleChange}
+              
+              readOnly
               className="form-control"
               required
             />
@@ -139,7 +140,7 @@ const UpdatePage = () => {
               id="published_year"
               name="published_year"
               value={formData.published_year}
-              onChange={handleChange}
+              readOnly
               className="form-control"
               required
             />
@@ -153,7 +154,7 @@ const UpdatePage = () => {
               id="register_code"
               name="register_code"
               value={formData.register_code}
-              onChange={handleChange}
+              readOnly
               className="form-control"
               required
             />
@@ -169,7 +170,7 @@ const UpdatePage = () => {
               id="ISBN"
               name="ISBN"
               value={formData.ISBN}
-              onChange={handleChange}
+              readOnly
               className="form-control"
               required
             />
@@ -186,7 +187,7 @@ const UpdatePage = () => {
               id="call_num"
               name="call_num"
               value={formData.call_num}
-              onChange={handleChange}
+              readOnly
               className="form-control"
               required
             />
