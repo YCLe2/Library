@@ -162,10 +162,15 @@ const ResultsPage = () => {
         if (isAlreadyRented) {
           alert("이미 대여한 책입니다.");
         } else {
-          // Get today's date and the return date (7 days from today)
+          // Get today's date  in local time 
+          
           const today = new Date();
-          const rentalDate = today.toISOString().split('T')[0];
-          const returnDate = new Date(today.setDate(today.getDate() + 7)).toISOString().split('T')[0];
+          const rentalDate = today.toLocaleDateString("sv-SE"); // YYYY-MM-DD 형식으로 반환 (로컬 시간 기준)
+
+          // Get the return date (7 days from today) in local time
+          const returnDate = new Date(today.setDate(today.getDate() + 7)).toLocaleDateString("sv-SE");
+          console.log(rentalDate, returnDate); // 확인용
+
 
           // Proceed with renting the book
           const response = await axios.post("https://672cb0b81600dda5a9f980b5.mockapi.io/api/v1/my_library", {
